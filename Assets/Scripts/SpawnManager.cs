@@ -5,10 +5,24 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject powerupPrefab;
+
     private float spawnRange = 9f;
+    private int enemyCount = 0;
+    public int round = 1;
+
     void Start()
     {
-        Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+        SpawnEnemy(round);
+        Instantiate(powerupPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+    }
+
+    void SpawnEnemy(int enemyToSpawn)
+    {
+        for(int i = 0; i < enemyToSpawn; i++)
+        {
+            Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+        }
     }
 
     private Vector3 GenerateSpawnPosition()
@@ -23,6 +37,11 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemyCount = FindObjectsOfType<Enemy>().Length;
+        if(enemyCount == 0)
+        {
+            round++;
+            SpawnEnemy(round);
+        }
     }
 }
