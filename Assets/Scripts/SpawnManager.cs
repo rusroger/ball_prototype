@@ -14,6 +14,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         SpawnEnemy(round);
+        Debug.Log("Ronda " + round);
         Instantiate(powerupPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
     }
 
@@ -42,6 +43,7 @@ public class SpawnManager : MonoBehaviour
         {
             round++;
             SpawnEnemy(round);
+            Debug.Log("Ronda " + round);
         }
     }
 }
